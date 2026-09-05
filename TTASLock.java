@@ -4,6 +4,7 @@ public class TTASLock
 {
 
     private final AtomicBoolean locked = new AtomicBoolean(false);
+     private int testAndSetCount = 0;
 
     /* Do not modify this method */
     private boolean testandTestAndSet() 
@@ -20,6 +21,9 @@ public class TTASLock
             while (locked.get()) {
                 // busy-wait
             }
+
+             testAndSetCount++;
+
             // the lock looked free — now actually try to grab it
             if (!testandTestAndSet()) {
                 // getAndSet returned false, meaning it was free and is
@@ -35,5 +39,10 @@ public class TTASLock
     {
         locked.set(false);
     }
+
+     public int getTestAndSetCount()
+{
+    return testAndSetCount;
+}
     
 }
