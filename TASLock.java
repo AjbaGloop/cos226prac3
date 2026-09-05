@@ -1,9 +1,11 @@
 import java.util.concurrent.atomic.AtomicBoolean;
 
+
 public class TASLock 
 {
 
     private final AtomicBoolean locked = new AtomicBoolean(false);
+    private int testAndSetCount = 0;
 
     /* Do not modify this method */
     private boolean testAndSet() 
@@ -12,13 +14,30 @@ public class TASLock
     }
 
     public void lock() 
+{
+    while (true)
     {
-        while (testAndSet()) {} 
+<<<<<<< Updated upstream
+        
+=======
+        testAndSetCount++;
+
+        if (!testAndSet())
+        {
+            return;
+        }
+>>>>>>> Stashed changes
     }
+}
 
     public void unlock() 
     {
-      locked.set(false);  
+        
     }
+
+    public int getTestAndSetCount()
+{
+    return testAndSetCount;
+}
     
 }
