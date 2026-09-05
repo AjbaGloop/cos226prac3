@@ -6,30 +6,9 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         int[] threadCounts = {2, 4, 8, 16, 32};
 
-<<<<<<< Updated upstream
-        TASLock lock = ;/*Your lock implementation here (You may also swap out the TAS lock for your optimised lock here)*/
-        Thread[] threads = new Thread[NUMBER_OF_THREADS];
-        long startTime = System.nanoTime();
-
-        for(int i = 0; i < NUMBER_OF_THREADS; i++) 
-        {
-
-            threads[i] = new Thread(() -> {
-
-                for(int j = 0; j < INCREMENTS_PER_THREAD; j++) 
-                {
-                    lock.lock();
-                    counter++;
-                    lock.unlock();
-                }
-            });
-
-            threads[i].start();
-=======
         System.out.println("===== TAS LOCK EXPERIMENT =====");
         for (int i = 0; i < threadCounts.length; i++) {
             runTASExperiment(threadCounts[i]);
->>>>>>> Stashed changes
         }
 
         System.out.println();

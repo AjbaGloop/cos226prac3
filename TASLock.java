@@ -17,22 +17,18 @@ public class TASLock
 {
     while (true)
     {
-<<<<<<< Updated upstream
-        
-=======
         testAndSetCount++;
 
         if (!testAndSet())
         {
             return;
         }
->>>>>>> Stashed changes
     }
 }
 
     public void unlock() 
     {
-        
+        locked.set(false);
     }
 
     public int getTestAndSetCount()
