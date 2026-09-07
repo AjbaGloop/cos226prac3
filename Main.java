@@ -21,6 +21,7 @@ public class Main {
     public static void runTASExperiment(int numberOfThreads) throws InterruptedException {
         long totalTime = 0;
         long totalTestAndSetCalls = 0;
+        int expectedCounter = numberOfThreads * INCREMENTS_PER_THREAD;
 
         System.out.println();
         System.out.println("TAS - " + numberOfThreads + " threads");
@@ -54,7 +55,10 @@ public class Main {
             totalTime += executionTime;
             totalTestAndSetCalls += testAndSetCalls;
 
-            System.out.println("Run " + run + ": " + executionTime + " ms, " + testAndSetCalls + " testAndSet calls");
+            System.out.println("Run " + run + ": " + executionTime + " ms, " + testAndSetCalls
+                    + " testAndSet calls, expected counter: " + expectedCounter
+                    + ", actual counter: " + counter
+                    + (counter == expectedCounter ? " (OK)" : " (MISMATCH - mutual exclusion violated!)"));
         }
 
         System.out.println("Average execution time: " + (totalTime / (double) NUMBER_OF_RUNS) + " ms");
@@ -64,6 +68,7 @@ public class Main {
     public static void runTTASExperiment(int numberOfThreads) throws InterruptedException {
         long totalTime = 0;
         long totalTestAndSetCalls = 0;
+        int expectedCounter = numberOfThreads * INCREMENTS_PER_THREAD;
 
         System.out.println();
         System.out.println("TTAS - " + numberOfThreads + " threads");
@@ -97,7 +102,10 @@ public class Main {
             totalTime += executionTime;
             totalTestAndSetCalls += testAndSetCalls;
 
-            System.out.println("Run " + run + ": " + executionTime + " ms, " + testAndSetCalls + " testAndSet calls");
+            System.out.println("Run " + run + ": " + executionTime + " ms, " + testAndSetCalls
+                    + " testAndSet calls, expected counter: " + expectedCounter
+                    + ", actual counter: " + counter
+                    + (counter == expectedCounter ? " (OK)" : " (MISMATCH - mutual exclusion violated!)"));
         }
 
         System.out.println("Average execution time: " + (totalTime / (double) NUMBER_OF_RUNS) + " ms");
